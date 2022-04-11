@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@drawable/bottom_rounded_white"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_width="match_parent">
+
+
+
+    <Spinner
+        android:id="@+id/session_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:ellipsize="end"
+        android:maxLines="1"
+
+        android:text="Edward Thompson"
+
+
+        android:transitionName="date"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/session_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:gravity="center_horizontal"
+        android:text="No Sessions available"
+        android:transitionName="title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/session_selection" />
+
+
+
+
+
+
+    <Button
+        android:id="@+id/session_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Session"
+        app:layout_constraintTop_toBottomOf="@+id/session_info" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

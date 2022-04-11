@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:contentScaleClosed="1.0"
+        app:contentScaleOpen="0.7"
+        app:menuScaleClosed="1.5"
+        app:menuScaleOpen="1.0"
+
+        app:marginFactor="0.45"
+        tools:openDrawer="start">
+
+        <include
+            android:id="@+id/content_main"
+            layout="@layout/content_main"
+            android:tag="content"
+            android:background="@drawable/activity_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="menu"
+            >
+
+            <include android:id="@+id/main_navigation_menu"
+                layout="@layout/main_navigation_menu"/>
+        </FrameLayout>
+
+
+    </nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

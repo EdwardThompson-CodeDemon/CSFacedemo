@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/layout"
+android:theme="@style/Theme.CSFaceDemo"
+    style="@style/Theme.CSFaceDemo"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:theme="@style/Theme.CSFaceDemo"
+        style="@style/Theme.CSFaceDemo"
+        android:elevation="12dp"
+        android:innerRadius="5dp"
+        android:shape="ring"
+        android:thicknessRatio="0.9"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:padding="10dp"  >
+            <RelativeLayout
+                android:id="@+id/source_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <!--</androidx.cardview.widget.CardView>-->
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                   android:layout_marginRight="3dp"
+                  android:tint="@color/red"
+                    android:src="@drawable/info"
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/device_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView2"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:text="Time : "
+                    android:visibility="gone"
+                    android:textSize="12dp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/device_status_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/device_status"
+
+                    android:layout_toRightOf="@+id/device_status"
+                    android:text=" "
+
+                    android:textSize="12dp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imageView2"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:text="Alert"
+                    android:textColor="@color/red"
+                    style="@style/TextAppearance.AppCompat.SearchResult.Title" />
+
+
+
+                <!--</androidx.cardview.widget.CardView>-->
+
+
+
+            </RelativeLayout>
+            <include layout="@layout/item_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/member_view"
+                android:visibility="gone"
+                android:layout_margin="50dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_centerInParent="true"
+                    android:padding="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:id="@+id/content"
+
+                    android:text="You have successfully verified at 11:00 "
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
