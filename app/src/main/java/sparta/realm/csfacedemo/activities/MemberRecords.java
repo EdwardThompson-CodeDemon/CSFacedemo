@@ -23,13 +23,17 @@ import sparta.realm.csfacedemo.utils.FastScrolRecyclerview.FastScrollRecyclerVie
 public class MemberRecords extends AppCompatActivity {
     ActivityMemberRecordsBinding binding;
     ArrayList<Member> members;
+    HashMap<String, Integer> mapIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMemberRecordsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        members = Realm.databaseManager.loadObjectArray(Member.class, new Query().setTableFilters("session='"+getIntent().getStringExtra("session")+"'").setOrderFilters(true, "name"));
+        mapIndex = calculateIndexesForName(members);
         initUI();
+//        members=
 //        DatabaseManager.log_event(this, "Checking Member records ...");
 
     }
@@ -40,12 +44,11 @@ public class MemberRecords extends AppCompatActivity {
         binding.include.title.setText("Member accounts");
 
         binding.include.back.setOnClickListener(v -> onBackPressed());
-        members = Realm.databaseManager.loadObjectArray(Member.class, new Query().setOrderFilters(true, "name"));
 
         binding.memberList.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         binding.memberList.setLayoutManager(linearLayoutManager);
-        HashMap<String, Integer> mapIndex = calculateIndexesForName(members);
+
         binding.memberList.setAdapter(new MemberAdapter(members, mapIndex,new MemberAdapter.onItemClickListener() {
             @Override
             public void onItemClick(Member mem, View view) {

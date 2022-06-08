@@ -126,7 +126,7 @@ public class MainActivity extends SpartaAppCompactActivity {
                 RecognitionSession recognitionSession=recognitionSessions.get(i);
                 runningRecognitionSession=recognitionSession;
                 binding.contentMain.include2.sessionInfo.setText("Session: "+recognitionSession.name+"\n"+Realm.databaseManager.getRecordCount(Member.class,"session='"+recognitionSession.transaction_no+"'")+" members");
-                binding.contentMain.include2.sessionAction.setText("Start Session");
+//                binding.contentMain.include2.sessionAction.setText("Start Session");
             }
 
             @Override
@@ -140,6 +140,8 @@ public class MainActivity extends SpartaAppCompactActivity {
             public void onClick(View view) {
                 if(!sessionRunning)
                 {
+                    sparta.realm.RC.RealmClientProtocol RD;
+
                     RecognitionSessionTrackerFile recognitionSessionTrackerFile=Realm.databaseManager.loadObject(RecognitionSessionTrackerFile.class,new Query().setTableFilters("session='"+runningRecognitionSession.transaction_no+"'"));
                     onPause();
                     initFaceRecognition(svars.current_app_config(act).file_path_employee_data+recognitionSessionTrackerFile.name);

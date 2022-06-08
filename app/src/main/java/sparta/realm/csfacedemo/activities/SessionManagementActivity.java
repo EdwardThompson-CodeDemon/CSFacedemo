@@ -39,7 +39,7 @@ ArrayList<RecognitionSession> recognitionSessions;
         binding.sessionsList.setAdapter(new RecognitionSessionAdapter(recognitionSessions, (mem, view) -> {
 
             Intent intent = new Intent(act, MemberRecords.class);
-            intent.putExtra("session", mem);
+            intent.putExtra("session", mem.transaction_no);
 
 
             Pair<View, String> p0 = Pair.create(view, "main_content");
