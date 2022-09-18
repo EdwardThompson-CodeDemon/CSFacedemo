@@ -73,14 +73,14 @@ Looper.loop();
         mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(Task<Location> task) {
-                Location location = task.getResult();
-                if (location == null) {
-                    requestNewLocationData();
-                    Log.e("Main", " location is null men");
-                } else {
-                    Log.e("my coords==> ", "lats " + location.getLatitude() + " longs " + location.getLongitude());
-                    main_handler.onLocationUpdated(location);
-                }
+//                Location location = task.getResult();
+//                if (location == null) {
+//                    requestNewLocationData();
+//                    Log.e("Main", " location is null men");
+//                } else {
+//                    Log.e("my coords==> ", "lats " + location.getLatitude() + " longs " + location.getLongitude());
+//                    main_handler.onLocationUpdated(location);
+//                }
             }
         });
     }

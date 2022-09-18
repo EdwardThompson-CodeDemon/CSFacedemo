@@ -179,27 +179,6 @@ public class ImportPhotosActivity extends SpartaAppCompactActivity {
         }
 
     }
-
-
-    static String randomTrackerPath;
-
-    FSDK.HTracker Randomtracker() {
-        FSDK.HTracker mTracker = new FSDK.HTracker();
-        randomTrackerPath = Uri.parse(svars.current_app_config(act).file_path_employee_data) + "Memory" + System.currentTimeMillis() + getAlphaNumericString(10) + ".dat";
-        if (FSDK.FSDKE_OK != FSDK.LoadTrackerMemoryFromFile(mTracker, randomTrackerPath)) {
-            int res = FSDK.CreateTracker(mTracker);
-            if (FSDK.FSDKE_OK != res) {
-                return null;
-            }
-        }
-        int errpos[] = new int[1];
-        FSDK.SetTrackerMultipleParameters(mTracker, "ContinuousVideoFeed=true;FacialFeatureJitterSuppression=0;RecognitionPrecision=1;Threshold=0.996;Threshold2=0.9995;ThresholdFeed=0.97;MemoryLimit=2000;HandleArbitraryRotations=false;DetermineFaceRotationAngle=false;InternalResizeWidth=70;FaceDetectionThreshold=3;", errpos);
-        if (errpos[0] != 0) {
-            return null;
-        }
-        return mTracker;
-    }
-
     FSDK.HTracker Tracker(String data_file_name) {
         FSDK.HTracker mTracker = new FSDK.HTracker();
         randomTrackerPath = Uri.parse(svars.current_app_config(act).file_path_employee_data) + data_file_name;
@@ -216,6 +195,7 @@ public class ImportPhotosActivity extends SpartaAppCompactActivity {
         }
         return mTracker;
     }
+
 
     /**
      * @param n length of the output
@@ -264,10 +244,12 @@ public class ImportPhotosActivity extends SpartaAppCompactActivity {
                 String names[] = new String[1];
                 FSDK.GetAllNames(mTracker, IDs[i], names, 1024);
                 if (names[0] != null && names[0].length() > 0) {
-                    Log.e(logTag, "Name found " + names[0] + " For id:" + IDs[i]);
+                    Log.e(logTag, "Name found " + names[0] + " For id:" + IDs[i]+".Purging");
                     named = true;
+                    FSDK.PurgeID(mTracker, IDs[i]);
+
                     FSDK.FreeImage(Image);
-                    return true;
+                    return false;
                 }
                 if (!named) {
                     Log.e(logTag, "Saving to tracker");
@@ -282,7 +264,7 @@ public class ImportPhotosActivity extends SpartaAppCompactActivity {
                 } else {
                     Log.e(logTag, "Image data exists in the tracker ");
                     FSDK.FreeImage(Image);
-                    return true;
+                    return false;
 
                 }
 
@@ -294,6 +276,27 @@ public class ImportPhotosActivity extends SpartaAppCompactActivity {
         }
         return false;
     }
+
+    static String randomTrackerPath;
+
+    FSDK.HTracker Randomtracker() {
+        FSDK.HTracker mTracker = new FSDK.HTracker();
+        randomTrackerPath = Uri.parse(svars.current_app_config(act).file_path_employee_data) + "Memory" + System.currentTimeMillis() + getAlphaNumericString(10) + ".dat";
+        if (FSDK.FSDKE_OK != FSDK.LoadTrackerMemoryFromFile(mTracker, randomTrackerPath)) {
+            int res = FSDK.CreateTracker(mTracker);
+            if (FSDK.FSDKE_OK != res) {
+                return null;
+            }
+        }
+        int errpos[] = new int[1];
+        FSDK.SetTrackerMultipleParameters(mTracker, "ContinuousVideoFeed=true;FacialFeatureJitterSuppression=0;RecognitionPrecision=1;Threshold=0.996;Threshold2=0.9995;ThresholdFeed=0.97;MemoryLimit=2000;HandleArbitraryRotations=false;DetermineFaceRotationAngle=false;InternalResizeWidth=70;FaceDetectionThreshold=3;", errpos);
+        if (errpos[0] != 0) {
+            return null;
+        }
+        return mTracker;
+    }
+
+
 
 
     private void copyFile(String inputPath, String outputPath) {
