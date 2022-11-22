@@ -32,6 +32,7 @@ import sparta.realm.csfacedemo.Globals;
 import sparta.realm.csfacedemo.MyApplication;
 import sparta.realm.csfacedemo.R;
 import sparta.realm.csfacedemo.StaticDataLoader;
+import sparta.realm.csfacedemo.SyncInterface;
 import sparta.realm.csfacedemo.Verification.FaceVerificationActivity;
 import sparta.realm.csfacedemo.adapters.AppModulesAdapter;
 import sparta.realm.csfacedemo.adapters.SessionSelectionAdapter;
@@ -55,7 +56,22 @@ public class MainActivity extends SpartaAppCompactActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUI();
+MyApplication.attatchInterface(new SyncInterface() {
+    @Override
+    public void onSyncCompleted(String service_id) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateDash();
+            }
+        });
+    }
 
+    @Override
+    public void onInfoUpdated(String info) {
+
+    }
+});
     }
 
     void mine()

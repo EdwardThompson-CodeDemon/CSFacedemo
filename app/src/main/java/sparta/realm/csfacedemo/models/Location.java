@@ -10,7 +10,7 @@ import sparta.realm.csfacedemo.Globals;
 
 
 @DynamicClass(table_name = "location")
-@SyncDescription(service_id = "13",service_name = "Tracking",service_type = SyncDescription.service_type.Download)
+//@SyncDescription(service_id = "13",service_name = "Tracking",service_type = SyncDescription.service_type.Download)
 @SyncDescription(service_id = "14",service_name = "Tracking",service_type = SyncDescription.service_type.Upload)
 
 public class Location extends RealmModel {

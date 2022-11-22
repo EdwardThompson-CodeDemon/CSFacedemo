@@ -14,9 +14,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,15 +81,40 @@ Device device;
     protected void onResume() {
         super.onResume();
         if (checkPermissions(this)) {
-            File f = new File(svars.current_app_config(this).file_path_employee_data);
-            f.mkdirs();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                  start_activity(new Intent(Splash.this, FaceVerificationActivity.class));
-                  finish();
+            if(Build.VERSION.SDK_INT >= 30) {
+               // if (Environment.isExternalStorageManager()) {
+                if (Environment.isExternalStorageEmulated()) {
+                    File f = new File(svars.current_app_config(this).file_path_employee_data);
+                    f.mkdirs();
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            start_activity(new Intent(Splash.this, FaceVerificationActivity.class));
+                            finish();
+                        }
+                    }, 3000);
+                } else {
+                    Toast.makeText(this, "Allow App Storage Permission", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                  //  intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    //intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                    Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
                 }
-            }, 3000);
+            }else{
+
+                File f = new File(svars.current_app_config(this).file_path_employee_data);
+                f.mkdirs();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        start_activity(new Intent(Splash.this, FaceVerificationActivity.class));
+                        finish();
+                    }
+                }, 3000);
+            }
+
         }
         new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
 

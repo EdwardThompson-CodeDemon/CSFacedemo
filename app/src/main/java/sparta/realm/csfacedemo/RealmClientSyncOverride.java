@@ -16,13 +16,14 @@ import static sparta.realm.realmclient.RealmClientServiceManager.convertImplicit
 public class RealmClientSyncOverride extends RealmClientCallbackInterface.Stub {
 
     public static RealmClientServiceManager rcsm;
-public String serverAddress="18.221.185.137";
+//public String serverAddress="18.221.185.137";
+public String serverAddress="20.216.187.240";
 public int serverPort=8890;
     public void Initialize(){
       if(rcsm==null){
 //          rcsm=new RealmClientServiceManager(this, svars.device_code(Realm.context),"192.168.1.12",8889,"demo","demo123");
 //          rcsm=new RealmClientServiceManager(this, svars.device_code(Realm.context),"18.218.201.137",9000,"demo","demo123");
-          rcsm=new RealmClientServiceManager(this, svars.device_code(Realm.context),serverAddress,9000,"demo","demo123");
+          rcsm=new RealmClientServiceManager(this, svars.device_code(Realm.context),serverAddress,serverPort,"demo","demo123");
       }
 
 
